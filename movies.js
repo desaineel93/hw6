@@ -35,8 +35,8 @@ window.addEventListener('DOMContentLoaded', async function(event) {
         for (i=0; i<movies.length; i++) {
           let movieID = movies[i].id
           let movieName = movies[i].original_title
-          let movieDescription = movies[i].overview
           let querySnapshot = await db.collection('watched').doc(`${movieID}`).get()
+
           if (querySnapshot.data()){
             document.querySelector(".movies").insertAdjacentHTML(`beforeend`, `
               <div class="movie-${movieID} w-1/5 p-4 opacity-20">
@@ -54,7 +54,9 @@ window.addEventListener('DOMContentLoaded', async function(event) {
               </div>
             `)
           }
+
           let watchButton = document.querySelector(`.movie-${movieID} .watched-button`)
+          
           watchButton.addEventListener("click", async function(event){
             event.preventDefault()
             document.querySelector(`.movie-${movieID}`).classList.add('opacity-20')
